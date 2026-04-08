@@ -1,34 +1,59 @@
 "use client";
 
-import { FormInput, FormLabel, Form, FormSubmit } from "@/app/src/shared/components/forms";
+import {useForm} from "react-hook-form";
+import {zodResolver} from "@hookform/resolvers/zod";
+import { FormInput, FormLabel, Form, FormSubmit, FormError } from "@/app/src/shared/components/forms";
+import { SignUpInput, SignUpSchema } from "../schemas/authSchema";
+
 
 export default function RegisterForm(){
+    const {register, handleSubmit, formState: {errors} } = useForm({
+        resolver: zodResolver(SignUpSchema),
+        mode: "all"
+    });
+    console.log(errors)
+    const onSubmit = (data: SignUpInput) => {
+        console.log(data)
+
+    }
     return(
-        <Form>
+        <Form
+            onSubmit={handleSubmit(onSubmit)}
+        >
             <FormLabel htmlFor="name">Nombre</FormLabel>
             <FormInput 
                 id="name"
                 type="text"
-                placeholder="Ingresa Tu Nombre"
+                placeholder="Ingresa tu Nombre"
+                {...register("name")}
             />
-        <FormLabel htmlFor="email">E-mail</FormLabel>
-        <FormInput 
-            id="email"
-            type="email"
-            placeholder="Ingresa tu Email"
+            {errors.name && <FormError>{errors.name.message}</FormError>}
+
+            <FormLabel htmlFor="email">E-mail</FormLabel>
+            <FormInput 
+                id="email"
+                type="email"
+                placeholder="Ingresa tu Email"
+            {...register("email")}
         />
+        {errors.email && <FormError>{errors.email.message}</FormError>}
         <FormLabel htmlFor="password">Password</FormLabel>
         <FormInput 
             id="password"
             type="password"
             placeholder="Password - Min. 8 Caracteres"
+            {...register("password")}
         />
-        <FormLabel htmlFor="password">Repetir Password</FormLabel>
+        {errors.password && <FormError>{errors.password.message}</FormError>}
+        
+        <FormLabel htmlFor="password_confirmation">Repetir Password</FormLabel>
         <FormInput 
             id="password_confirmation"
             type="password"
             placeholder="Repite tu Password"
+            {...register("passwordConfirmation")}
         />
+        {errors.passwordConfirmation && <FormError>{errors.passwordConfirmation.message}</FormError>}
         <FormSubmit value="Registrarme" />
         </Form>
     )
