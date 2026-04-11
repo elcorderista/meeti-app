@@ -22,7 +22,7 @@
       "@/*": ["./*"],
       "@/components/*":["./app/src/shared/components/*"],
       "@/utils/*":["./app/src/shared/utils/*"],
-      "@lib/auth":["./app/src/lib/auth.ts"]
+      "@/lib/auth/*":["./app/src/lib/auth/*"],
     }
   },
   "include": [

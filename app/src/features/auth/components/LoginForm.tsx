@@ -1,5 +1,5 @@
 "use client";
-import {Form, FormLabel, FormSubmit, FormInput } from "@/components/forms/";
+import {Form, FormLabel, FormSubmit, FormInput, MicrosoftSignInButton } from "@/components/forms/";
 ;
 
 export default function LoginForm(){
@@ -18,6 +18,7 @@ export default function LoginForm(){
                 placeholder="Ingresa tu Password"
             />
             <FormSubmit value="Iniciar Sesión" />
+            <MicrosoftSignInButton/>
         </Form>
 
     )
