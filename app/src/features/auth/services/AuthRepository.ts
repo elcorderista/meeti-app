@@ -1,8 +1,22 @@
 /**
  * This file handle the connection with the Database
  */
+import {db} from "@/src/db";
+import {User} from "../types/auth.types";
 
-class AuthRepository {
+export interface IAuthRepository {
+    userExists(email: string): Promise<User | undefined>
+}
+
+class AuthRepository implements IAuthRepository {
+    async userExists(email: string): Promise<User | undefined> {
+        const user = await db.query.users.findFirst({
+            where: {
+                email
+            }
+        });
+        return user;
+    }
 
 }
 

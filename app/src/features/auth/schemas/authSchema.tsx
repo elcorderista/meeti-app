@@ -18,4 +18,12 @@ export const SignUpSchema = BaseAuthSchema.pick({
     path: ['passwordConfirmation']
 })
 
+// Schema para el Login, solo necesitamos el email y password, por eso usamos pick para seleccionar solo esos campos del BaseAuthSchema
+export const SignInSchema = BaseAuthSchema.pick({
+    email: true,
+}).extend({
+    password: z.string().trim().min(1, "El Passord es obligatorio"),
+})
+
 export type SignUpInput = z.infer<typeof SignUpSchema>
+export type SignInInput = z.infer<typeof SignInSchema>

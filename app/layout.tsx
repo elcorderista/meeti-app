@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import {Toaster } from 'react-hot-toast';
 import { Outfit } from "next/font/google";
 import "./globals.css";
 
@@ -21,9 +22,14 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${outfit.variable} ${outfit.variable} h-full antialiased`}
-    >
-      <body className="min-h-full flex flex-col">{children}</body>
+      className="h-full bg=white">
+    
+      <body className={`${outfit.variable}' antialiased'`}>
+        {children}
+        <Toaster 
+          position="top-right"
+        />
+      </body>
     </html>
   );
 }

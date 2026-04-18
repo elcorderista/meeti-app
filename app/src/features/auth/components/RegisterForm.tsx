@@ -1,6 +1,7 @@
 "use client";
 
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   FormInput,
@@ -17,16 +18,25 @@ export default function RegisterForm() {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors }, reset
   } = useForm({
     resolver: zodResolver(SignUpSchema),
     mode: "all",
   });
   console.log(errors);
+
   const onSubmit = async (data: SignUpInput) => {
-    console.log("Submitting form with data: ", data);
-    await signUpAction(data);
+    
+    const {error, success} = await signUpAction(data);
+    if (error){
+      toast.error(error)
+    }
+    if (success){
+      toast.success(success)
+      reset()
+    }
   };
+  
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
       <FormLabel htmlFor="name">Nombre</FormLabel>

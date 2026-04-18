@@ -22,7 +22,8 @@
       "@/*": ["./*"],
       "@/components/*":["./app/src/shared/components/*"],
       "@/utils/*":["./app/src/shared/utils/*"],
-      "@/lib/auth/*":["./app/src/lib/auth/*"],
+      "@/lib/*":["./app/src/lib/*"],
+      "@/src/*":["./app/src/*"]
     }
   },
   "include": [
